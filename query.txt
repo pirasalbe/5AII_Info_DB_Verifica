@@ -162,3 +162,9 @@ insert into Iscrizioni(SiglaC,Matricola)
 values('DB','5');
 
 #query
+select I.Matricola, I.SiglaC
+from (Iscrizioni I inner join Studenti S on S.Matricola=I.Matricola)
+inner join CorsiDiLaurea L on L.CorsoLaurea=S.CorsoLaurea
+where L.Facolta='Scienze';
+
+
