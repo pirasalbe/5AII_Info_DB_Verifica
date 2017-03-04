@@ -168,3 +168,29 @@ inner join CorsiDiLaurea L on L.CorsoLaurea=S.CorsoLaurea
 where L.Facolta='Scienze';
 
 
+#query 4
+#DNome e DocenteId corso con più di 5 studenti
+
+insert into Studenti(SNome,CorsoLaurea,eta)
+values('Miro','1','17');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('DB','6');
+
+insert into Studenti(SNome,CorsoLaurea,eta)
+values('Antonio','1','17');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('DB','7');
+
+insert into Studenti(SNome,CorsoLaurea,eta)
+values('De Franceschi','1','17');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('DB','8');
+
+#query
+select D.DNome, D.DocenteId
+from (Docenti D inner join Corsi C on C.DocenteId=D.DocenteId)
+inner join Iscrizioni I on I.SiglaC = C.SiglaC 
+group by D.DNome, D.DocenteId having Count(*)>5;
