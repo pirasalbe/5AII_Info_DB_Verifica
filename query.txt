@@ -70,12 +70,57 @@ from Iscrizioni);
 
 
 #query 2
+#SiglaC dei corsi frequentati da studenti di informatica
 
 insert into CorsiDiLaurea(Facolta,TipoLaurea)
 values('Informatica','Triennale');
 
+insert into CorsiDiLaurea(Facolta,TipoLaurea)
+values('Scienze Motorie','Triennale');
+
 insert into Docenti(DNome, Dipartimento)
-values ('Sgroi','Informatica');
+values ('Viggi','Informatica');
+
+insert into Docenti(DNome, Dipartimento)
+values ('Lorenzin','Motoria');
 
 insert into Corsi(SiglaC,Aula,DocenteId)
-values('InfoLab','110','1');
+values('Info','115','2');
+
+insert into Corsi(SiglaC,Aula,DocenteId)
+values('Motoria','111','3');
+
+insert into Corsi(SiglaC,Aula,DocenteId)
+values('DB','115','2');
+
+insert into Studenti(SNome,CorsoLaurea,eta)
+values('Pertile','1','19');
+
+insert into Studenti(SNome,CorsoLaurea,eta)
+values('Canevarolo','1','20');
+
+insert into Studenti(SNome,CorsoLaurea,eta)
+values('Martina','2','17');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('Info','1');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('DB','1');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('Info','2');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('DB','2');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('Motoria','3');
+
+#query
+select C.SiglaC
+from ((Corsi C inner join Iscrizioni I on C.SiglaC=I.SiglaC)
+inner join Studenti S on S.Matricola=I.Matricola)
+inner join CorsiDiLaurea L on L.CorsoLaurea=S.CorsoLaurea
+where L.Facolta='Informatica';
+
