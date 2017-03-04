@@ -1,13 +1,13 @@
 #create table
 
 create table CorsiDiLaurea(
-CorsoLaurea int primary key,
+CorsoLaurea int primary key auto_increment,
 Facolta varchar(20) not null,
 TipoLaurea varchar(20) not null
 );
 
 create table Studenti(
-Matricola int primary key,
+Matricola int primary key auto_increment,
 SNome varchar(20) not null,
 CorsoLaurea int not null,
 eta int not null,
@@ -15,13 +15,13 @@ foreign key(CorsoLaurea) references CorsiDiLaurea(CorsoLaurea)
 );
 
 create table Docenti(
-DocenteId int primary key,
+DocenteId int primary key auto_increment,
 DNome varchar(20) not null,
 Dipartimento varchar(20) not null
 );
 
 create table Corsi(
-SiglaC int primary key,
+SiglaC varchar(20) primary key,
 Aula varchar(20) not null,
 DocenteId int not null,
 foreign key(DocenteId) references Docenti(DocenteId)
@@ -29,7 +29,7 @@ foreign key(DocenteId) references Docenti(DocenteId)
 
 create table Iscrizioni(
 Matricola int not null,
-SiglaC int not null,
+SiglaC varchar(20) not null,
 primary key(Matricola, SiglaC),
 foreign key(Matricola) references Studenti(Matricola),
 foreign key(SiglaC) references Corsi(SiglaC)
@@ -44,5 +44,38 @@ describe Corsi;
 describe Iscrizioni;
 
 
-#insert
+#show
+select * from CorsiDiLaurea;
+select * from Studenti;
+select * from Docenti;
+select * from Corsi;
+select * from Iscrizioni;
 
+
+#query 1
+#DocenteId senza duplicazioni di corso senza iscrizioni
+#Non fare iscrizioni per quel corso!!!
+
+insert into Docenti(DNome, Dipartimento)
+values ('Sgroi','Informatica');
+
+insert into Corsi(SiglaC,Aula,DocenteId)
+values('InfoLab','110','1');
+
+#query
+select Distinct(D.DocenteId)
+from Docenti D inner join Corsi C on C.DocenteId=D.DocenteId
+where C.SiglaC not in (select SiglaC
+from Iscrizioni);
+
+
+#query 2
+
+insert into CorsiDiLaurea(Facolta,TipoLaurea)
+values('Informatica','Triennale');
+
+insert into Docenti(DNome, Dipartimento)
+values ('Sgroi','Informatica');
+
+insert into Corsi(SiglaC,Aula,DocenteId)
+values('InfoLab','110','1');
