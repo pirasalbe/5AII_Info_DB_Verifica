@@ -194,3 +194,10 @@ select D.DNome, D.DocenteId
 from (Docenti D inner join Corsi C on C.DocenteId=D.DocenteId)
 inner join Iscrizioni I on I.SiglaC = C.SiglaC 
 group by D.DNome, D.DocenteId having Count(*)>5;
+
+
+#query 5
+#Facolta, Eta Media
+select L.Facolta, AVG(Eta)
+from CorsiDiLaurea L inner join Studenti S on L.CorsoLaurea=S.CorsoLaurea
+group by L.Facolta;
