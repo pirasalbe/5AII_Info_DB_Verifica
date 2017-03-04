@@ -124,3 +124,41 @@ inner join Studenti S on S.Matricola=I.Matricola)
 inner join CorsiDiLaurea L on L.CorsoLaurea=S.CorsoLaurea
 where L.Facolta='Informatica';
 
+
+#query 3
+#Matricola e Corsi seguiti dove CorsoLaurea Scienze
+
+insert into CorsiDiLaurea(Facolta,TipoLaurea)
+values('Scienze','Triennale');
+
+insert into Docenti(DNome, Dipartimento)
+values ('Zampese','Informatica');
+
+insert into Docenti(DNome, Dipartimento)
+values ('Tessarolo','Motoria');
+
+insert into Corsi(SiglaC,Aula,DocenteId)
+values('Batteri','1','4');
+
+insert into Corsi(SiglaC,Aula,DocenteId)
+values('TATATATA','2','5');
+
+insert into Studenti(SNome,CorsoLaurea,eta)
+values('Visentin','3','19');
+
+insert into Studenti(SNome,CorsoLaurea,eta)
+values('Miazzo','3','20');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('TATATATA','4');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('Batteri','4');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('TATATATA','5');
+
+insert into Iscrizioni(SiglaC,Matricola)
+values('DB','5');
+
+#query
