@@ -1,0 +1,48 @@
+#create table
+
+create table CorsiDiLaurea(
+CorsoLaurea int primary key,
+Facolta varchar(20) not null,
+TipoLaurea varchar(20) not null
+);
+
+create table Studenti(
+Matricola int primary key,
+SNome varchar(20) not null,
+CorsoLaurea int not null,
+eta int not null,
+foreign key(CorsoLaurea) references CorsiDiLaurea(CorsoLaurea)
+);
+
+create table Docenti(
+DocenteId int primary key,
+DNome varchar(20) not null,
+Dipartimento varchar(20) not null
+);
+
+create table Corsi(
+SiglaC int primary key,
+Aula varchar(20) not null,
+DocenteId int not null,
+foreign key(DocenteId) references Docenti(DocenteId)
+);
+
+create table Iscrizioni(
+Matricola int not null,
+SiglaC int not null,
+primary key(Matricola, SiglaC),
+foreign key(Matricola) references Studenti(Matricola),
+foreign key(SiglaC) references Corsi(SiglaC)
+);
+
+
+#describe
+describe CorsiDiLaurea;
+describe Studenti;
+describe Docenti;
+describe Corsi;
+describe Iscrizioni;
+
+
+#insert
+
